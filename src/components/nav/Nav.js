@@ -1,12 +1,11 @@
+import '../nav/Nav.css';
+
 const Nav = () => {
   return (
     <nav>
     <ul>
       <li>
         <a href="#home">Home</a>
-      </li>
-      <li>
-        <a href="#todos">Todos</a>
       </li>
       <li>
         <a href="#login">Login</a>

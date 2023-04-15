@@ -1,0 +1,48 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+}
+
+nav li {
+  margin-right: 10px;
+}
+
+nav a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff; 
+  background-color: #4a86e8; 
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #0056b3; 
+}
+
+nav a + a {
+  margin-left: 10px;
+}
+
+nav .comment-button {
+  background-color: #6c757d; 
+}
+
+nav .comment-button:hover {
+  background-color: #444c52; 
+}
+

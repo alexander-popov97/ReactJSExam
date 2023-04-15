@@ -1,3 +1,5 @@
+import '../register/Register.css';
+
 const Register = () => {
   return (
     <section id="register">

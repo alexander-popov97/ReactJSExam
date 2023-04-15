@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import './styles.css';
-
-import Nav from './components/Nav';
-import Todos from './components/Todos';
+import Nav from './components/nav/Nav';
+import Todos from './components/todos/Todos';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
-//import Register from './components/Register';
+import Register from './components/register/Register';
+import Login from './components/login/Login';
 
 function App() {
 
@@ -28,7 +27,8 @@ function App() {
   <Header />
   <Todos todos={todos} />
   <Footer />
-  { /*<Register /> */ }
+  <Register />
+  <Login />
 </>
 
   );
