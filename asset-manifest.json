@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ReactJSExam/static/css/main.56694faa.css",
+    "main.js": "/ReactJSExam/static/js/main.2451c7a9.js",
+    "static/js/787.1fee1fb8.chunk.js": "/ReactJSExam/static/js/787.1fee1fb8.chunk.js",
+    "index.html": "/ReactJSExam/index.html",
+    "main.56694faa.css.map": "/ReactJSExam/static/css/main.56694faa.css.map",
+    "main.2451c7a9.js.map": "/ReactJSExam/static/js/main.2451c7a9.js.map",
+    "787.1fee1fb8.chunk.js.map": "/ReactJSExam/static/js/787.1fee1fb8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56694faa.css",
+    "static/js/main.2451c7a9.js"
+  ]
+}
