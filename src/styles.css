@@ -1,0 +1,79 @@
+/* Reset some default styles for better consistency */
+body, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+}
+
+/* Set some global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+nav {
+  background-color: #333;
+  height: 40px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  margin-right: 20px;
+}
+
+nav ul li {
+  margin-left: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+
+h1 {
+  font-size: 32px;
+}
+
+main {
+  padding: 20px;
+  text-align: center; /* Center align the sections */
+}
+
+section {
+  margin-bottom: 20px;
+  display: inline-block; /* Display the sections as inline blocks */
+  text-align: left; /* Reset text alignment for section content */
+  width: 100%; /* Set width to 100% to make it responsive */
+}
+
+section h2 {
+  margin-bottom: 10px;
+}
+
+#todos-list {
+  padding-left: 20px;
+}
+
+footer {
+  padding: 10px;
+  text-align: center;
+  background-color: #333;
+}
+
+footer p {
+  color: #fff;
+}
