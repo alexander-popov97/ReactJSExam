@@ -15,8 +15,8 @@ const Todos = ({
           <th>Action</th>
         </tr>
         {todos.map(todo => (
-          <tr key={todo.id}>
-            <td>{todo.id}</td>
+          <tr key={todo._id}>
+            <td>{todo._id}</td>
             <td>{todo.text}</td>
             <td>
               <button>Edit</button>
@@ -27,15 +27,6 @@ const Todos = ({
         ))}
       </tbody>
     </table>
-    // <main>
-    // <div className="container">
-    //   <ul id="todos-list">
-    //     {todos.map(todo => (
-    //     <li key={todo.id}>{todo.text}</li>
-    //     ))}
-    //   </ul>
-    // </div>
-    // </main>
   )
 }
 

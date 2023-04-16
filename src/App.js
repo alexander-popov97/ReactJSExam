@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import Nav from './components/nav/Nav';
 import Todos from './components/todos/Todos';
@@ -16,20 +17,25 @@ function App() {
     .then(res => res.json())
     .then(data => {
       const result = Object.keys(data).map(id => ({id, ...data[id]}))
-      console.log(result)
-      setTodos(Object.values(result))});
-    
+      setTodos(Object.values(result))})
+    .catch(e => {
+      console.log("Error: " + e);
+    })
   }, [])
 
   return (
     <>
-  <Nav />
-  <Header />
-  <Todos todos={todos} />
-  <Footer />
-  <Register />
-  <Login />
-</>
+      <Nav />
+      <Header />
+      
+      <Routes>
+       <Route path='/' element={<Todos todos={todos} />} />
+       <Route path='/register' element={<Register />} />
+       <Route path='/login' element={<Login />} />
+      </Routes>
+
+      <Footer />
+    </>
 
   );
 }
