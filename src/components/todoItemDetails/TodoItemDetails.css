@@ -1,0 +1,55 @@
+.todo-details {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.todo-details h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.todo-info {
+  margin-bottom: 10px;
+}
+
+.todo-info label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.add-comment-section {
+  margin-top: 20px;
+}
+
+.add-comment-section h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#comment-text {
+  width: 100%;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.comments-section h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#comments-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#comments-list li {
+  margin-bottom: 10px;
+}

@@ -47,3 +47,19 @@ nav .comment-button {
 nav .comment-button:hover {
   background-color: #444c52;
 }
+
+/* Add new todo button style */
+nav .add-new-todo {
+  background-color: #4a86e8;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; /* Adjust spacing as needed */
+}
+
+nav .add-new-todo:hover {
+  background-color: #0056b3;
+}

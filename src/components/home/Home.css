@@ -1,0 +1,20 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-image: url('https://www.aspectpt.com/wp-content/uploads/2022/09/Cut-time-scheduling-work-orders-by-2-days.png'); /* Update with your own image */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.6); /* Add text shadow for better readability */
+}
+
