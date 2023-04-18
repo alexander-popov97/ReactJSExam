@@ -28,22 +28,21 @@ useEffect(() => {
 
   return (
 
-    <form id="edit" method="POST" submit={onSubmit}>
+    <form id="edit" method="PUT" onSubmit={onSubmit}>
       <div className="todo-list">
         <h1>Editing...</h1>
         <label htmlFor="edit-todo-text">Todo Text</label>
         <input 
         type="text"
         name="text" 
-        id="edit-todo" 
-        defaultValue=""
+        id="edit-todo"
         value={values.text}
         onChange={changeHandler}
         />
         <label for="deadline-input">Deadline</label>
         <input 
         type="text"
-        name="deadline" 
+        name="Deadline" 
         id="deadline-input"
         value={values.Deadline}
         onChange={changeHandler}

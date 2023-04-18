@@ -1,48 +1,83 @@
 import './TodoItemDetails.css';
 
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
 
 import { todoServiceFactory } from '../../services/todoService';
-import * as commentService from '../../services/commentService';
 import { useService } from '../../hooks/useService';
+import { AuthContext } from '../../contexts/AuthContext';
+//import * as commentService from '../../services/commentService';
+import { useForm } from '../../hooks/useForm';
+import { AddComment } from '../addComment/AddComment';
 
-const TodoItem = () => {
-
-  const [username, setUsername] = useState('');
-  const [comment, setComment] = useState('');
-  const [comments, setComments] = useState([]);
-
+const TodoItemDetails = ({
+  onDeleteClick,
+  onCommentDeleteClick
+}) => {
   const { todoId } = useParams();
 
+  const { userId, isAuthenticated, userEmail } = useContext(AuthContext);
+
   const [todo, setTodo] = useState({});
+  const [todos, setTodos] = useState([]);
+  const {} = useForm();
   const todoService = useService(todoServiceFactory);
 
   useEffect(() => {
-    todoService.getOne(todoId)
-    .then(result => {
-      setTodo(result);
-      return commentService.getAll(todoId);
-    })
-    .then(result => {
-      setComments(result);
-    })
-  }, [todoId])
 
-  const onCommentSubmit = async (e) => {
-    e.preventDefault();
-    await commentService.create({
-      todoId,
-      username,
-      comment
+    Promise.all([
+      todoService.getOne(todoId),
+      todoService.getAllComments(todoId)
+
+    ]).then(([todoData, comments]) => {
+      setTodo({
+        ...todoData,
+        comments,
+      });
+
     })
-    setUsername('');
-    setComment('');
+    }, [todoId]);
+
+    useEffect(() => {
+
+      todoService.getAll()
+      .then(tasks => {
+        setTodos(tasks);
+      })
+    }, [])
+
+  const onCommentSubmit = async (values) => {
+
+    const response = await todoService.addComment(todoId, values.comment);
+    console.log(response);
+    setTodo(state => ({
+      ...state,
+      comments: [
+        ...state.comments, 
+        {
+          ...response,
+          author: {
+            email: userEmail,
+          }
+        }
+      ],
+    }))
+    
   }
+
+  const isOwner = todo._ownerId === userId;
 
   return (
     <div className="todo-details">
       <h1>Todo Details</h1>
+      
+                {isOwner && (
+                    <div className="buttons">
+                        <Link to={`/catalog/${todo._id}/edit`} className="button">Edit</Link>
+                        <button className="button" onClick={() => onDeleteClick(todo._id)}>Delete</button>
+                    </div>
+                )}
+           
       <div className="todo-info">
         <label htmlFor="todo-text">Todo:</label>
         <p id="todo-text">{todo.text}</p>
@@ -55,23 +90,19 @@ const TodoItem = () => {
         <label htmlFor="todo-created">Deadline:</label>
         <p id="todo-created">{todo.Deadline}</p>
       </div>
-      <div className="add-comment-section">
-        <h2>Add Comment</h2>
-        <form onSubmit={onCommentSubmit}>
-          <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
-          <textarea id="comment-text" rows="4" cols="50" value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+      
+        {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
+
       <div className="comments-section">
         <h2>Comments</h2>
         <ul id="comments-list">
-          {comments.map(x => (
-            <li key={x._id}>
-              <p>{x.username}: {x.comment}</p>
+          {todo.comments && todo.comments.map(x => (
+            <li key={x._id} className="comment">
+              <p>{x.author.email}: {x.comment}</p>
+              {isOwner && <button className="button" onClick={() => onCommentDeleteClick(todo._id)}>Delete</button>}
             </li>
-          )
-          )}
+          ))}
+            
         </ul>
       </div>
     </div>
@@ -79,4 +110,4 @@ const TodoItem = () => {
   );
 }
 
-export default TodoItem;
+export default TodoItemDetails;

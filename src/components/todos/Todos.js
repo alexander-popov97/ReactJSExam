@@ -1,12 +1,29 @@
 import '../todos/Todos.css';
 import '../todos/NoTodos.css';
+import { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
+import { Link } from 'react-router-dom';
+
+import { useService } from "../../hooks/useService";
+
+import { todoServiceFactory } from '../../services/todoService';
 import TodoItem from '../todoItem/TodoItem';
 
 const Todos = ({
   todos,
 }) => {
-  console.log(todos)
+  const [tasks, setTodos] = useState([]);
+  const { userEmail } = useContext(AuthContext);
+  const todoService = useService(todoServiceFactory);
+
+  useEffect(() => {
+
+    todoService.getAll()
+    .then(tasks => {
+      setTodos(tasks);
+    })
+  }, [])
   
     return (
       <>
@@ -21,7 +38,14 @@ const Todos = ({
               <th>Action</th>
             </tr>
             {todos.map(todo => (
-              <TodoItem key={todo._id} {...todo} />
+              <tr key={todo._id}>
+              <td>{todo.email}</td>
+              <td>{todo.text}</td>
+              <td>
+                <Link to={`/catalog/${todo._id}`}>Details</Link>
+              </td>
+            </tr>
+              // <TodoItem key={todo._id} {...todo} />
             ))}
           </tbody>
         </table>)}

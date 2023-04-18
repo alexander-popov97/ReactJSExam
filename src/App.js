@@ -20,9 +20,12 @@ import TodoItemDetails from './components/todoItemDetails/TodoItemDetails.js';
 function App() {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
+  const [comments, setComments] = useState([]);
   const [user, setUser] = useState({});
   const todoService = todoServiceFactory(user.accessToken);
   const authService = authServiceFactory(user.accessToken);
+
+
 
   useEffect(() => {
 
@@ -34,7 +37,8 @@ function App() {
 
   const onCreateTodoSubmit = async (data) => {
     const newTodo = await todoService.create(data);
-    setTodos(state => [...state, newTodo])
+    console.log(newTodo)
+    setTodos(state => [...state, {...newTodo, email:user.email}])
     navigate('/catalog');
   }
 
@@ -69,23 +73,35 @@ function App() {
     await authService.logout();
   }
 
+  const onDeleteClick = async (id) => {
+    const res = await todoService.delete(id);
+    setTodos(state => state.filter(x => x._id !== id))
+    navigate('/catalog');
+  };
+
+  // const onCommentDeleteClick = async (id) => {
+  //   console.log(id);
+  //   const res = await todoService.deleteComment(id);
+  //   setTodos(comments.filter(x => x._id !== id ))
+    
+  // };
+
   const onTodoEditSubmit = async (values) => {
     const result = await todoService.edit(values._id, values);
 
     setTodos(state => state.map(x => x._id === values._id ? result : x))
-
-    navigate(`/catalog/${values._id}`);
+    navigate('/catalog/');
 }
 
-  const context = {
-    onRegisterSubmit,
-    onLoginSubmit,
-    onLogout,
-    userId: user._id,
-    token: user.accessToken,
-    userEmail: user.email,
-    isAuthenticated: !!user.accessToken,
-  }
+    const context = {
+      onRegisterSubmit,
+      onLoginSubmit,
+      onLogout,
+      userId: user._id,
+      token: user.accessToken,
+      userEmail: user.email,
+      isAuthenticated: !!user.accessToken,
+    }
 
   return (
     <>
@@ -99,7 +115,7 @@ function App() {
        <Route path='/register' element={<Register />} />
        <Route path='/login' element={<Login />} />
        <Route path='/create' element={<CreateTodo onCreateTodoSubmit={onCreateTodoSubmit} />} />
-       <Route path='/catalog/:todoId' element={<TodoItemDetails />} />
+       <Route path='/catalog/:todoId' element={<TodoItemDetails token={user.accessToken} onDeleteClick={onDeleteClick} />} />
        <Route path='/logout' element={<Logout />} />
        <Route path='/catalog/:todoId/edit' element={<EditTodo onTodoEditSubmit={onTodoEditSubmit} /> } />
       </Routes>
