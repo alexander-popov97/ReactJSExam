@@ -39,7 +39,7 @@ useEffect(() => {
         value={values.text}
         onChange={changeHandler}
         />
-        <label for="deadline-input">Deadline</label>
+        <label htmlFor="deadline-input">Deadline</label>
         <input 
         type="text"
         name="Deadline" 

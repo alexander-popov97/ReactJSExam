@@ -1,3 +1,5 @@
+import '../addComment/AddComment.css';
+
 import { useForm } from "../../hooks/useForm"
 
 export const AddComment = ({
@@ -13,13 +15,6 @@ export const AddComment = ({
         <h2>Add Comment</h2>
 
         <form method="POST" onSubmit={onSubmit}>
-          {/* 
-            <input 
-            type="text" 
-            name="username" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)}>
-            </input> */}
 
           <textarea 
           id="comment-text" 

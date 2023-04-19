@@ -1,18 +1,16 @@
 import './TodoItemDetails.css';
 
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 
 import { todoServiceFactory } from '../../services/todoService';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
-//import * as commentService from '../../services/commentService';
 import { useForm } from '../../hooks/useForm';
 import { AddComment } from '../addComment/AddComment';
 
 const TodoItemDetails = ({
   onDeleteClick,
-  onCommentDeleteClick
 }) => {
   const { todoId } = useParams();
 
@@ -72,7 +70,7 @@ const TodoItemDetails = ({
       <h1>Todo Details</h1>
       
                 {isOwner && (
-                    <div className="buttons">
+                    <div className="details-buttons">
                         <Link to={`/catalog/${todo._id}/edit`} className="button">Edit</Link>
                         <button className="button" onClick={() => onDeleteClick(todo._id)}>Delete</button>
                     </div>
@@ -82,29 +80,26 @@ const TodoItemDetails = ({
         <label htmlFor="todo-text">Todo:</label>
         <p id="todo-text">{todo.text}</p>
       </div>
-      <div className="todo-info">
-        <label htmlFor="todo-author">Author:</label>
-        <p id="todo-author">{todo._id}</p>
-      </div>
+      
       <div className="todo-info">
         <label htmlFor="todo-created">Deadline:</label>
         <p id="todo-created">{todo.Deadline}</p>
       </div>
       
-        {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
+        
 
       <div className="comments-section">
         <h2>Comments</h2>
         <ul id="comments-list">
           {todo.comments && todo.comments.map(x => (
             <li key={x._id} className="comment">
-              <p>{x.author.email}: {x.comment}</p>
-              {isOwner && <button className="button" onClick={() => onCommentDeleteClick(todo._id)}>Delete</button>}
+              <p className="comment-list">{x.author.email}: {x.comment}</p>
             </li>
           ))}
             
         </ul>
       </div>
+      {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
     </div>
 
   );

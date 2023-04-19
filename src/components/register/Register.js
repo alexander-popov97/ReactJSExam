@@ -16,7 +16,7 @@ const Register = () => {
   return (
     <section id="register">
       <h2>Register</h2>
-      <form id="register-form" method="POST" onsubmit={onSubmit}>
+      <form id="register-form" method="POST" onSubmit={onSubmit}>
         <label htmlFor="email">Email</label>
         <input 
           type="email" 

@@ -20,7 +20,6 @@ import TodoItemDetails from './components/todoItemDetails/TodoItemDetails.js';
 function App() {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
-  const [comments, setComments] = useState([]);
   const [user, setUser] = useState({});
   const todoService = todoServiceFactory(user.accessToken);
   const authService = authServiceFactory(user.accessToken);
@@ -79,17 +78,9 @@ function App() {
     navigate('/catalog');
   };
 
-  // const onCommentDeleteClick = async (id) => {
-  //   console.log(id);
-  //   const res = await todoService.deleteComment(id);
-  //   setTodos(comments.filter(x => x._id !== id ))
-    
-  // };
-
   const onTodoEditSubmit = async (values) => {
     const result = await todoService.edit(values._id, values);
-
-    setTodos(state => state.map(x => x._id === values._id ? result : x))
+    setTodos(state => state.map(x => x._id === values._id ? {...result, email:user.email} : x))
     navigate('/catalog/');
 }
 
